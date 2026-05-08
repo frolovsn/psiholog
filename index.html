@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="default">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Частный психолог — индивидуальная консультация</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F8F9FA;--accent:#1e3a5f;--text:#111827;--bg-card:#FFFFFF;--bg-alt:#EEF2F7;--border:#D1D5DB;--radius:12px;--transition:0.6s ease}
+[data-theme="crisis"]{--bg:#A9BCD0;--accent:#4A5B7C;--text:#2C3E50;--bg-card:#C8D8E8;--bg-alt:#8FA5BC;--border:#7A90A8}
+[data-theme="neutral"]{--bg:#F5F5DC;--accent:#556B2F;--text:#2F4F4F;--bg-card:#FFFFFF;--bg-alt:#E8ECC8;--border:#C0C8A0}
+[data-theme="growth"]{--bg:#E0F2F1;--accent:#8A9A8B;--text:#1B4D3E;--bg-card:#F0FAF9;--bg-alt:#CDE8E6;--border:#A0C4C0}
+[data-theme="energy"]{--bg:#FFF3E0;--accent:#B87333;--text:#4A3B2C;--bg-card:#FFF8F0;--bg-alt:#FFE8CC;--border:#E0C8A0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;background-color:var(--bg);color:var(--text);line-height:1.6;transition:background-color var(--transition),color var(--transition);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+img{max-width:100%;display:block}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* Header */
+header{position:sticky;top:0;z-index:100;background-color:var(--bg);border-bottom:1px solid var(--border);transition:background-color var(--transition),border-color var(--transition)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:16px;flex-wrap:wrap}
+.logo{font-size:1.25rem;font-weight:700;color:var(--accent);transition:color var(--transition);white-space:nowrap}
+nav{display:flex;align-items:center;gap:24px}
+.nav-links{display:none;gap:20px}
+.nav-links a{font-size:.9rem;font-weight:500;color:var(--text);transition:color .3s}
+.nav-links a:hover{color:var(--accent)}
+.burger{display:flex;flex-direction:column;gap:5px;padding:4px}
+.burger span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:background-color var(--transition)}
+.mood-switcher{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--text);transition:color var(--transition)}
+.mood-switcher span.label{display:none}
+.mood-btns{display:flex;gap:4px}
+.mood-btn{font-size:1.4rem;padding:4px 6px;border-radius:8px;transition:background-color .3s,transform .3s}
+.mood-btn:hover{transform:scale(1.15)}
+.mood-btn.active{background-color:var(--bg-alt);box-shadow:0 0 0 2px var(--accent)}
+.mobile-menu{display:none;width:100%;padding:16px 0;flex-direction:column;gap:12px;border-top:1px solid var(--border)}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:1rem;font-weight:500;color:var(--text);padding:8px 0;transition:color .3s}
+
+/* Hero */
+.hero{padding:80px 0 60px;text-align:center;transition:background-color var(--transition)}
+.hero h1{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:700;line-height:1.25;margin-bottom:16px;color:var(--text);transition:color var(--transition)}
+.hero p{font-size:clamp(1rem,2vw,1.15rem);max-width:600px;margin:0 auto 32px;color:var(--text);opacity:.85;transition:color var(--transition)}
+.cta-btn{display:inline-block;background-color:#c9a961;color:#fff;font-size:1rem;font-weight:600;padding:14px 36px;border-radius:50px;transition:background-color .3s,transform .3s;animation:pulse 2.5s infinite}
+.cta-btn:hover{background-color:#b8953f;transform:scale(1.04)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,97,.5)}50%{box-shadow:0 0 0 14px rgba(201,169,97,0)}}
+
+/* Section common */
+section{padding:60px 0}
+.section-title{font-size:clamp(1.3rem,3vw,2rem);font-weight:700;text-align:center;margin-bottom:12px;color:var(--text);transition:color var(--transition)}
+.section-subtitle{text-align:center;font-size:1rem;color:var(--text);opacity:.75;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto;transition:color var(--transition)}
+
+/* Problems */
+.problems-grid{display:grid;grid-template-columns:1fr;gap:20px}
+.problem-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;transition:background-color var(--transition),border-color var(--transition),transform .3s}
+.problem-card:hover{transform:translateY(-3px)}
+.problem-icon{width:40px;height:40px;margin-bottom:14px;color:var(--accent);transition:color var(--transition)}
+.problem-card h3{font-size:1.05rem;font-weight:600;margin-bottom:8px;color:var(--text);transition:color var(--transition)}
+.problem-card p{font-size:.9rem;color:var(--text);opacity:.8;transition:color var(--transition)}
+
+/* Process timeline */
+.process{background-color:var(--bg-alt);transition:background-color var(--transition)}
+.timeline{max-width:600px;margin:0 auto;position:relative;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:16px;top:0;bottom:0;width:2px;background:var(--border);transition:background-color var(--transition)}
+.timeline-item{position:relative;padding-bottom:36px}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{position:absolute;left:-32px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg-alt);transition:background-color var(--transition),border-color var(--transition)}
+.timeline-step{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:4px;transition:color var(--transition)}
+.timeline-item h3{font-size:1.1rem;font-weight:600;margin-bottom:6px;color:var(--text);transition:color var(--transition)}
+.timeline-item p{font-size:.9rem;color:var(--text);opacity:.8;transition:color var(--transition)}
+
+/* Trust */
+.trust-grid{display:grid;grid-template-columns:1fr;gap:24px}
+.trust-item{display:flex;align-items:flex-start;gap:16px}
+.trust-icon{flex-shrink:0;width:36px;height:36px;color:var(--accent);transition:color var(--transition)}
+.trust-item h3{font-size:1rem;font-weight:600;margin-bottom:4px;color:var(--text);transition:color var(--transition)}
+.trust-item p{font-size:.88rem;color:var(--text);opacity:.8;transition:color var(--transition)}
+
+/* Reviews */
+.reviews{background-color:var(--bg-alt);transition:background-color var(--transition)}
+.reviews-grid{display:grid;grid-template-columns:1fr;gap:20px}
+.review-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;transition:background-color var(--transition),border-color var(--transition)}
+.review-text{font-size:.95rem;margin-bottom:16px;color:var(--text);line-height:1.65;transition:color var(--transition)}
+.review-author{font-size:.85rem;font-weight:600;color:var(--accent);transition:color var(--transition)}
+.review-meta{font-size:.8rem;color:var(--text);opacity:.65;margin-top:2px;transition:color var(--transition)}
+
+/* Contacts */
+.contacts-wrapper{display:grid;grid-template-columns:1fr;gap:32px}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:.85rem;font-weight:500;color:var(--text);transition:color var(--transition)}
+.form-group input,.form-group textarea{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:.95rem;font-family:inherit;background:var(--bg-card);color:var(--text);transition:border-color .3s,background-color var(--transition),color var(--transition);outline:none}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-error{font-size:.8rem;color:#c0392b;display:none}
+.form-group.error input,.form-group.error textarea{border-color:#c0392b}
+.form-group.error .form-error{display:block}
+.submit-btn{background-color:var(--accent);color:#fff;font-size:1rem;font-weight:600;padding:14px;border-radius:8px;transition:background-color .3s,opacity .3s;align-self:flex-start}
+.submit-btn:hover{opacity:.88}
+.form-success{display:none;font-size:.95rem;color:var(--accent);font-weight:500;margin-top:8px;text-align:center}
+.form-success.visible{display:block}
+.contact-info{display:flex;flex-direction:column;gap:20px}
+.messenger-btns{display:flex;gap:12px;flex-wrap:wrap}
+.msg-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;font-size:.9rem;font-weight:500;border:1px solid var(--border);color:var(--text);transition:background-color .3s,border-color .3s,color .3s}
+.msg-btn:hover{background:var(--bg-alt);border-color:var(--accent)}
+.msg-btn svg{width:20px;height:20px}
+.map-placeholder{width:100%;height:200px;background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;color:var(--text);opacity:.5;font-size:.9rem;transition:background-color var(--transition),border-color var(--transition),color var(--transition)}
+
+/* Footer */
+footer{padding:32px 0;border-top:1px solid var(--border);transition:border-color var(--transition)}
+.footer-inner{display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center}
+.footer-inner p{font-size:.85rem;color:var(--text);opacity:.7;transition:color var(--transition)}
+.footer-inner a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;transition:color .3s}
+
+/* Media */
+@media(min-width:640px){
+.problems-grid{grid-template-columns:repeat(2,1fr)}
+.trust-grid{grid-template-columns:repeat(3,1fr)}
+.reviews-grid{grid-template-columns:repeat(2,1fr)}
+.contacts-wrapper{grid-template-columns:1fr 1fr}
+.mood-switcher span.label{display:inline}
+}
+@media(min-width:960px){
+.nav-links{display:flex}
+.burger{display:none}
+.problems-grid{grid-template-columns:repeat(3,1fr)}
+.reviews-grid{grid-template-columns:repeat(3,1fr)}
+.header-inner{padding:20px 0}
+.hero{padding:120px 0 80px}
+section{padding:80px 0}
+}
+@media(max-width:360px){
+.mood-btns{gap:2px}
+.mood-btn{font-size:1.2rem;padding:2px 4px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container header-inner">
+<a href="#" class="logo">Анна Петрова · Психолог</a>
+<nav>
+<ul class="nav-links">
+<li><a href="#problems">С чем работаю</a></li>
+<li><a href="#process">Как проходит</a></li>
+<li><a href="#trust">Доверие</a></li>
+<li><a href="#reviews">Отзывы</a></li>
+<li><a href="#contacts">Контакты</a></li>
+</ul>
+<div class="mood-switcher">
+<span class="label">Как вы себя чувствуете?</span>
+<div class="mood-btns">
+<button class="mood-btn active" data-theme="default" aria-label="Базовая тема">😊</button>
+<button class="mood-btn" data-theme="crisis" aria-label="Тема: смятение">😕</button>
+<button class="mood-btn" data-theme="neutral" aria-label="Тема: баланс">😐</button>
+<button class="mood-btn" data-theme="growth" aria-label="Тема: рост">🌱</button>
+<button class="mood-btn" data-theme="energy" aria-label="Тема: ресурс">⚡</button>
+</div>
+</div>
+<button class="burger" aria-label="Открыть меню" aria-expanded="false">
+<span></span><span></span><span></span>
+</button>
+</nav>
+</div>
+<div class="container mobile-menu" id="mobileMenu">
+<a href="#problems">С чем работаю</a>
+<a href="#process">Как проходит</a>
+<a href="#trust">Доверие</a>
+<a href="#reviews">Отзывы</a>
+<a href="#contacts">Контакты</a>
+</div>
+</header>
+
+<main>
+<section class="hero" id="hero">
+<div class="container">
+<h1 id="heroTitle">Поддержка и профессиональная помощь в трудный период</h1>
+<p id="heroSub">Индивидуальные консультации онлайн и очно. Бережное пространство для работы с внутренними конфликтами и жизненными кризисами.</p>
+<a href="#contacts" class="cta-btn">Записаться на консультацию</a>
+</div>
+</section>
+
+<section id="problems">
+<div class="container">
+<h2 class="section-title">С чем я работаю</h2>
+<p class="section-subtitle">Обращайтесь, если вы столкнулись с одной из следующих ситуаций — вместе мы найдём путь к решению.</p>
+<div class="problems-grid">
+<div class="problem-card">
+<svg class="problem-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/><path d="M12 8v4l3 3"/></svg>
+<h3>Тревожность и панические атаки</h3>
+<p>Постоянное чувство напряжения, навязчивые мысли, страх перед будущим, физиологические симптомы тревоги.</p>
+</div>
+<div class="problem-card">
+<svg class="problem-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+<h3>Депрессивные состояния</h3>
+<p>Потеря интереса к жизни, апатия, подавленное настроение, нарушения сна и аппетита, ощущение бессмысленности.</p>
+</div>
+<div class="problem-card">
+<svg class="problem-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+<h3>Проблемы в отношениях</h3>
+<p>Конфликты в паре, созависимость, трудности в коммуникации, расставание, одиночество в отношениях.</p>
+</div>
+<div class="problem-card">
+<svg class="problem-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+<h3>Самооценка и границы</h3>
+<p>Неуверенность в себе, синдром самозванца, неумение сказать «нет», перфекционизм, зависимость от оценки других.</p>
+</div>
+<div class="problem-card">
+<svg class="problem-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+<h3>Профессиональное выгорание</h3>
+<p>Эмоциональное истощение, потеря мотивации, кризис карьеры, конфликты на работе, поиск призвания.</p>
+</div>
+<div class="problem-card">
+<svg class="problem-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2Z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+<h3>Утрата и горевание</h3>
+<p>Потеря близкого человека, развод, переезд, утрата привычного уклада жизни — проживание горя и адаптация.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="process" id="process">
+<div class="container">
+<h2 class="section-title">Как проходит работа</h2>
+<p class="section-subtitle">Четыре последовательных этапа от первого обращения до устойчивого результата.</p>
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-step">Шаг 1</div>
+<h3>Первый контакт</h3>
+<p>Вы оставляете заявку или пишете в мессенджер. Мы обсуждаем ваш запрос, формат и удобные условия встречи.</p>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-step">Шаг 2</div>
+<h3>Диагностическая сессия</h3>
+<p>На первой встрече мы подробно разбираем вашу ситуацию, определяем цели терапии и согласуем план работы.</p>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-step">Шаг 3</div>
+<h3>Терапевтическая работа</h3>
+<p>Регулярные встречи раз в неделю. Используем методы КПТ, схема-терапии и эмоционально-фокусированного подхода.</p>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-step">Шаг 4</div>
+<h3>Закрепление результата</h3>
+<p>Фиксируем изменения, разрабатываем план самостоятельной поддержки и при необходимости назначаем редкие поддерживающие встречи.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="trust">
+<div class="container">
+<h2 class="section-title">Почему мне можно доверять</h2>
+<p class="section-subtitle">Профессиональная этика и конфиденциальность — основа моей практики.</p>
+<div class="trust-grid">
+<div class="trust-item">
+<svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+<div>
+<h3>Полная конфиденциальность</h3>
+<p>Всё, что вы рассказываете на сессии, остаётся строго между нами. Я соблюдаю закон о персональных данных.</p>
+</div>
+</div>
+<div class="trust-item">
+<svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+<div>
+<h3>Образование и супервизия</h3>
+<p>Высшее психологическое образование, регулярная супервизия и повышение квалификации каждые 6 месяцев.</p>
+</div>
+</div>
+<div class="trust-item">
+<svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+<div>
+<h3>Этический кодекс</h3>
+<p>Работаю в соответствии с этическим кодексом Российского психологического общества. Уважение, безопасность, прозрачность.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="reviews" id="reviews">
+<div class="container">
+<h2 class="section-title">Отзывы клиентов</h2>
+<p class="section-subtitle">Реальные истории людей, которые решились на изменения.</p>
+<div class="reviews-grid">
+<div class="review-card">
+<p class="review-text">«Пришла с полной потерей ориентиров после развода. Через три месяца терапии я впервые за два года почувствовала, что дышу свободно. Анна помогла мне не просто пережить кризис, а вырасти из него.»</p>
+<div class="review-author">Мария</div>
+<div class="review-meta">34 года · кризис в отношениях</div>
+</div>
+<div class="review-card">
+<p class="review-text">«Панические атаки мучили меня больше года. Психолог дала конкретные инструменты, которые работают. Через полтора месяца я смог вернуться к нормальной работе и перелётам без страха.»</p>
+<div class="review-author">Дмитрий</div>
+<div class="review-meta">28 лет · тревожное расстройство</div>
+</div>
+<div class="review-card">
+<p class="review-text">«Долго не могла решиться на терапию из-за страха осуждения. Здесь я почувствовала безопасность с первой минуты. Теперь я умеет выстраивать границы и не чувствую за это вины.»</p>
+<div class="review-author">Елена</div>
+<div class="review-meta">41 год · самооценка и границы</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="contacts">
+<div class="container">
+<h2 class="section-title">Записаться на консультацию</h2>
+<p class="section-subtitle">Оставьте заявку — я свяжусь с вами в течение 24 часов, чтобы выбрать удобное время.</p>
+<div class="contacts-wrapper">
+<form class="contact-form" id="contactForm" novalidate>
+<div class="form-group">
+<label for="name">Имя</label>
+<input type="text" id="name" name="name" placeholder="Ваше имя" required aria-label="Ваше имя">
+<span class="form-error">Пожалуйста, введите имя</span>
+</div>
+<div class="form-group">
+<label for="phone">Телефон</label>
+<input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required aria-label="Номер телефона">
+<span class="form-error">Укажите номер телефона</span>
+</div>
+<div class="form-group">
+<label for="email">Электронная почта</label>
+<input type="email" id="email" name="email" placeholder="example@mail.ru" required aria-label="Адрес электронной почты">
+<span class="form-error">Введите корректный email</span>
+</div>
+<div class="form-group">
+<label for="message">Сообщение <span style="opacity:.5">(необязательно)</span></label>
+<textarea id="message" name="message" placeholder="Кратко опишите ваш запрос..." aria-label="Ваше сообщение"></textarea>
+</div>
+<button type="submit" class="submit-btn">Отправить заявку</button>
+<div class="form-success" id="formSuccess">Заявка принята. Я свяжусь с вами в течение 24 часов.</div>
+</form>
+<div class="contact-info">
+<p style="font-size:.95rem;color:var(--text);opacity:.85;transition:color var(--transition)">Вы также можете написать мне напрямую — я отвечаю в течение нескольких часов.</p>
+<div class="messenger-btns">
+<a href="https://wa.me/79001234567" target="_blank" rel="noopener" class="msg-btn" aria-label="Написать в WhatsApp">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+WhatsApp
+</a>
+<a href="https://t.me/username" target="_blank" rel="noopener" class="msg-btn" aria-label="Написать в Telegram">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.216s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+Telegram
+</a>
+</div>
+<div class="map-placeholder" aria-label="Карта — г. Москва">
+<span>📍 г. Москва · ул. Примерная, д. 10 · Яндекс.Карты</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container footer-inner">
+<p>© <span id="year"></span> Анна Петрова · Психолог. Все права защищены.</p>
+<p><a href="#" aria-label="Политика конфиденциальности">Политика конфиденциальности</a></p>
+<p>Тел.: +7 (900) 123-45-67 · Email: psycho@example.ru</p>
+</div>
+</footer>
+
+<script>
+(function(){
+const html=document.documentElement;
+const heroTitle=document.getElementById('heroTitle');
+const heroSub=document.getElementById('heroSub');
+const moodBtns=document.querySelectorAll('.mood-btn');
+const themes={
+default:{title:'Поддержка и профессиональная помощь в трудный период',sub:'Индивидуальные консультации онлайн и очно. Бережное пространство для работы с внутренними конфликтами и жизненными кризисами.'},
+crisis:{title:'Трудные времена не должны переживаться в одиночку',sub:'Я помогу вам пройти через этот период. Вместе мы найдём опору и вернём чувство безопасности.'},
+neutral:{title:'Чёткий план для возвращения к внутреннему равновесию',sub:'Структурированная работа с вашим запросом. Пошаговый путь к стабильности и ясности.'},
+growth:{title:'Пространство для осознанных изменений и обновления',sub:'Откройте новые грани себя. Терапия как инвестиция в вашу будущую жизнь.'},
+energy:{title:'Время действовать и возвращать себе жизненные силы',sub:'Активная работа на результат. Вернём мотивацию, энергию и уверенность в завтрашнем дне.'}
+};
+
+function setTheme(key){
+html.dataset.theme=key;
+heroTitle.textContent=themes[key].title;
+heroSub.textContent=themes[key].sub;
+moodBtns.forEach(function(b){b.classList.toggle('active',b.dataset.theme===key)});
+}
+
+moodBtns.forEach(function(btn){
+btn.addEventListener('click',function(){setTheme(this.dataset.theme)});
+});
+
+document.getElementById('year').textContent=new Date().getFullYear();
+
+/* Burger */
+var burger=document.querySelector('.burger');
+var mobileMenu=document.getElementById('mobileMenu');
+burger.addEventListener('click',function(){
+var open=mobileMenu.classList.toggle('open');
+burger.setAttribute('aria-expanded',open);
+});
+mobileMenu.querySelectorAll('a').forEach(function(a){
+a.addEventListener('click',function(){mobileMenu.classList.remove('open');burger.setAttribute('aria-expanded','false')});
+});
+
+/* Form */
+var form=document.getElementById('contactForm');
+var formSuccess=document.getElementById('formSuccess');
+var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+form.addEventListener('submit',function(e){
+e.preventDefault();
+var valid=true;
+var groups=form.querySelectorAll('.form-group');
+groups.forEach(function(g){g.classList.remove('error')});
+
+var name=document.getElementById('name');
+var phone=document.getElementById('phone');
+var email=document.getElementById('email');
+
+if(!name.value.trim()){name.closest('.form-group').classList.add('error');valid=false}
+if(!phone.value.trim()){phone.closest('.form-group').classList.add('error');valid=false}
+if(!emailRe.test(email.value.trim())){email.closest('.form-group').classList.add('error');valid=false}
+
+if(valid){
+formSuccess.classList.add('visible');
+form.reset();
+setTimeout(function(){formSuccess.classList.remove('visible')},6000);
+}
+});
+})();
+</script>
+</body>
+</html>
